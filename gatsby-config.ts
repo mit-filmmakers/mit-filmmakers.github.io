@@ -1,13 +1,15 @@
 import type { GatsbyConfig } from "gatsby";
+import { config as envconfig } from "dotenv"
+
+envconfig({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 const config: GatsbyConfig = {
   siteMetadata: {
     title: `MIT Filmmakers`,
-    siteUrl: `https://www.yourdomain.tld`
+    siteUrl: `https://mit-filmmakers.github.io`
   },
-  // More easily incorporate content into your pages through automatic TypeScript type generation and better GraphQL IntelliSense.
-  // If you use VSCode you can also use the GraphQL plugin
-  // Learn more at: https://gatsby.dev/graphql-typegen
   graphqlTypegen: true,
   plugins: ["gatsby-plugin-image", "gatsby-plugin-react-helmet", "gatsby-plugin-sitemap", {
     resolve: 'gatsby-plugin-manifest',
@@ -21,7 +23,23 @@ const config: GatsbyConfig = {
       "path": "./src/images/"
     },
     __key: "images"
-  }]
+  },
+  "gatsby-plugin-sass",
+  {
+    resolve: 'gatsby-source-notion',
+    options: {
+      previewCallRate: 0,
+      databases: [
+        '25d74178e32a42e59198051cd6d95e27',
+        'e9abca687aea43759021ba2fc60449e1'
+      ],
+      pages: [
+        '55a47082d41f4dc38ee35d36b99b7208'
+      ],
+    },
+  },
+  `gatsby-plugin-mdx`
+  ]
 };
 
 export default config;
