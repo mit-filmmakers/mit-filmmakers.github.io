@@ -1,6 +1,8 @@
 name: Gatsby Publish
 
 on:
+  repository_dispatch:
+    types: [admin-page]
   schedule:
     - cron: '0 8 * * *'
   push:
