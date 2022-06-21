@@ -23,8 +23,10 @@ interface FilmProps {
 
 const Film = ({url, title_en, title_zh}: FilmProps) => <article className="container content is-max-desktop" key={url}>
   <h2>{title_en}</h2>
-  <div style={{position: "relative", padding: "30% 45%"}}>
-    <iframe style={{position: "absolute", width: "100%", height: "100%", left: "0", top: "0"}} src={url + "&high_quality=1"} scrolling="no" data-border="0" data-frameborder="no" data-framespacing="0" data-allowfullscreen="true">
+  <div style={{position: "relative", padding: "30% 45%", maxWidth: 1080}}>
+    {/* <iframe style={{position: "absolute", width: "100%", height: "100%", left: "0", top: "0"}} src={url + "&high_quality=1"} scrolling="no" data-border="0" data-frameborder="no" data-framespacing="0" data-allowfullscreen="true">
+    </iframe> */}
+    <iframe style={{position: "absolute", width: "100%", height: "100%", left: "0", top: "0"}} src={url} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
     </iframe>
   </div>
 </article>
@@ -39,7 +41,7 @@ const Gallery = ({ data }: PageProps<Queries.GalleryQuery>) => {
     return {
       title_en: title || "",
       title_zh: properties?.Name__Chinese_ || "",
-      url: properties?.Bilibili_URL || ""
+      url: properties?.Youtube_URL || ""
     }
   })
   return (
@@ -61,6 +63,7 @@ query Gallery {
       title
       properties {
         Bilibili_URL
+        Youtube_URL
         Name__Chinese_
         Category
       }
