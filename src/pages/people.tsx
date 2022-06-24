@@ -1,10 +1,9 @@
-import "../styles/bulma.scss"
-import "../styles/index.scss"
-import * as React from "react"
-import { ReactElement } from "react"
-import Layout from "../components/Layout"
-import { GatsbyImage, GatsbyImageProps, IGatsbyImageData, StaticImage } from "gatsby-plugin-image"
-import { graphql, PageProps } from "gatsby"
+import * as React from "react";
+import "../styles/index.scss";
+import { ReactElement } from "react";
+import Layout from "../components/Layout";
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
+import { graphql, PageProps } from "gatsby";
 
 interface PersonProps {
   name: string,
@@ -36,7 +35,7 @@ const Introduction = () => <section className="section">
     People
   </h1>
   <p>
-    Our people...
+    Placeholder text
   </p>
 </article>
 </section>
@@ -53,7 +52,8 @@ const Group = ({ category, nodes }: { category: string, nodes: PersonProps[] }) 
 </section>
 
 const People = ({ data }: PageProps<Queries.PeopleQuery>) => {
-  const nodes: PersonProps[] = data.allNotionPage.nodes.map(({ title, properties, image }) => {
+  const nodes: PersonProps[] = data.notionDatabase?.childrenNotionPage?.map(page => {
+    const { title, properties, image } = page || {};
     const imageData = image?.childImageSharp?.gatsbyImageData;
     const photo = imageData ? <GatsbyImage image={imageData} alt={title || ""}/> : <StaticImage src={"../images/mitao.jpg"} alt="fallback" />
     return {
@@ -63,43 +63,36 @@ const People = ({ data }: PageProps<Queries.PeopleQuery>) => {
       major: properties?.Major || "",
       category: properties?.Category || "",
       photo: photo }
-  });
+  }) || [];
   nodes.sort((a, b) => a.name.localeCompare(b.name));
   const officers = nodes.filter(({ category }) => category == 'Officer');
   const members = nodes.filter(({ category }) => category == 'Member');
   const alumni = nodes.filter(({ category }) => category == 'Alumni');
   return (
     <Layout slug="people">
-      <main>
-        <Introduction />
-        <Group category={'Officers'} nodes={officers}/>
-        <Group category={'Members'} nodes={members}/>
-        <Group category={'Alumni'} nodes={alumni}/>
-      </main>
+      <Introduction />
+      <Group category={'Officers'} nodes={officers}/>
+      <Group category={'Members'} nodes={members}/>
+      <Group category={'Alumni'} nodes={alumni}/>
     </Layout>
   )
 }
 
 export const query = graphql`
 query People {
-  allNotionPage(filter: {parent: {id: {eq: "8511632c-ea41-5c6b-b58a-2b4834ad2e2b"}}}) {
-    nodes {
+  notionDatabase(title: {eq: "People"}) {
+    childrenNotionPage {
       title
       image {
         childImageSharp {
-          gatsbyImageData(
-            width: 250
-            height: 250
-            placeholder: BLURRED
-            formats: [AUTO, WEBP, AVIF]
-          )
+          gatsbyImageData(width: 250, height: 250, placeholder: BLURRED, formats: [AUTO, WEBP])
         }
       }
       properties {
         Affiliation
+        Category
         EDU_Email
         Major
-        Category
       }
     }
   }

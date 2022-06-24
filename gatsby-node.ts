@@ -1,5 +1,5 @@
-import { GatsbyNode } from "gatsby"
-import { createRemoteFileNode } from "gatsby-source-filesystem"
+import { GatsbyNode } from "gatsby";
+import { createRemoteFileNode } from "gatsby-source-filesystem";
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = ({ actions }) => {
   actions.createTypes(`

@@ -1,42 +1,34 @@
-import * as React from "react"
-import "../styles/bulma.scss"
-import "../styles/index.scss"
-import Layout from "../components/Layout"
-import { graphql, PageProps } from "gatsby"
-
-//  style={{backgroundImage: "linear-gradient(to bottom, rgba(200,240,255,0.5), rgba(255,255,255,0.5))"}}
+import * as React from "react";
+import "../styles/index.scss";
+import Layout from "../components/Layout";
+import { graphql, PageProps } from "gatsby";
+import { MDXRenderer } from "gatsby-plugin-mdx";
 
 const Introduction = ({ content }: { content: string }) => <section className="section">
   <article className="container content is-max-desktop">
     <h1>
       Philosophy
     </h1>
-    <p>
-      { content}
-    </p>
+    <MDXRenderer>
+      {content}
+    </MDXRenderer>
   </article>
 </section>
 
 // markup
 const Philosophy = ({ data }: PageProps<Queries.PhilosophyQuery>) => {
-  let content = data.notionPage?.internal.content || "";
-  let philosophy = content.match(/\n# Philosophy\n\n([\s\S]+\n)/)[1];
-  console.log(philosophy);
+  let content = data?.mdx?.body || "";
   return (
     <Layout slug="philosophy">
-      <main>
-        <Introduction content={philosophy}/>
-      </main>
+      <Introduction content={content}/>
     </Layout>
   )
 }
 
 export const query = graphql`
 query Philosophy {
-  notionPage(id: {eq: "02cf680f-b644-54aa-9622-843e0b386615"}) {
-    internal {
-      content
-    }
+  mdx(frontmatter: {title: {eq: "Philosophy"}}) {
+    body
   }
 }
 `

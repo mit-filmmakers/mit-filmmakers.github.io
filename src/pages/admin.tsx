@@ -1,8 +1,7 @@
-import * as React from "react"
-import "../styles/bulma.scss"
-import "../styles/index.scss"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheck } from "@fortawesome/free-solid-svg-icons"
+import * as React from "react";
+import "../styles/index.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 const endpoint = "https://publicactiontrigger.azurewebsites.net/api/dispatches/mit-filmmakers/mit-filmmakers.github.io";
 
@@ -34,21 +33,16 @@ class Admin extends React.Component<object, AdminState> {
     }
 
     render() {
-        return <main>
-            <div style={{display: 'flex', justifyContent: 'center', padding: "2rem"}}>
-                { this.state.status == Status.finished ?
-                <span className={`button is-info`} style={{minWidth: '5.5rem'}}>
-                    <FontAwesomeIcon icon={faCheck} className="icon is-small"/>
-                </span> :
-                this.state.status == Status.submitting ?
-                <span className={`button is-info is-loading`} style={{minWidth: '5.5rem'}}>Rebuild</span> :
-                <span className={`button is-info`} style={{minWidth: '5.5rem'}} onClick={() => this.rebuild()}>Rebuild</span>
-                }
-            </div>
-            <p>
-                {this.state.status}
-            </p>
-        </main>
+        return <div style={{display: 'flex', justifyContent: 'center', padding: "2rem"}}>
+            { this.state.status == Status.finished ?
+            <span className={`button is-info`} style={{minWidth: '5.5rem'}}>
+                <FontAwesomeIcon icon={faCheck} className="icon is-small"/>
+            </span> :
+            this.state.status == Status.submitting ?
+            <span className={`button is-info is-loading`} style={{minWidth: '5.5rem'}}>Rebuild</span> :
+            <span className={`button is-info`} style={{minWidth: '5.5rem'}} onClick={() => this.rebuild()}>Rebuild</span>
+            }
+        </div>
     }
 }
 
