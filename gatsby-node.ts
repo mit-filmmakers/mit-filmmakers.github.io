@@ -1,5 +1,6 @@
 import { GatsbyNode } from "gatsby";
 import { createRemoteFileNode } from "gatsby-source-filesystem";
+import { resolve } from "path";
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = ({ actions }) => {
   actions.createTypes(`
@@ -9,6 +10,28 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
       title: String!
     }
   `)
+}
+
+export const createPages: GatsbyNode['createPages'] = async ({actions, graphql}) => {
+  const {data} = await graphql(`
+  query Events {
+    notionDatabase(title: {eq: "Events"}){
+      childrenNotionPage{
+        id
+        properties {
+          ID
+        }
+      }
+    }
+  }
+  `) as {data: {notionDatabase: {childrenNotionPage: {id: string, properties: {ID: string}}[]}}}
+  data.notionDatabase.childrenNotionPage.forEach( ({id, properties}) => {
+    actions.createPage({
+      path: `${properties.ID}`,
+      component: resolve("./src/templates/event.tsx"),
+      context: {id: id}
+    })
+  })
 }
 
 export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
