@@ -14,7 +14,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
 
 export const createPages: GatsbyNode['createPages'] = async ({actions, graphql}) => {
   const {data} = await graphql(`
-  query Events {
+  query EventID {
     notionDatabase(title: {eq: "Events"}){
       childrenNotionPage{
         id
@@ -27,7 +27,7 @@ export const createPages: GatsbyNode['createPages'] = async ({actions, graphql})
   `) as {data: {notionDatabase: {childrenNotionPage: {id: string, properties: {ID: string}}[]}}}
   data.notionDatabase.childrenNotionPage.forEach( ({id, properties}) => {
     actions.createPage({
-      path: `${properties.ID}`,
+      path: `events/${properties.ID}`,
       component: resolve("./src/templates/event.tsx"),
       context: {id: id}
     })
