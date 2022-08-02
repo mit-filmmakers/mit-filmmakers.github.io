@@ -1,13 +1,10 @@
-import "../styles/index.scss"
-import * as React from "react"
-import { ReactElement } from "react"
-import Layout from "../components/Layout"
-import { GatsbyImage, GatsbyImageProps, IGatsbyImageData, StaticImage } from "gatsby-plugin-image"
-import { graphql, PageProps } from "gatsby"
-import { Link } from "gatsby"
+import "../styles/index.scss";
+import * as React from "react";
+import Layout from "../components/Layout";
+import { graphql, PageProps, Link } from "gatsby";
+import slugify from "slugify";
 
 interface EventProps {
-  id: string,
   name: string,
   category: string,
   date: string,
@@ -25,10 +22,10 @@ const Introduction = () => <section className="section">
 </article>
 </section>
 
-const Event = ({ id, name, category, date, location }: EventProps) => <section className="section">
+const Event = ({ name, category, date, location }: EventProps) => <section className="section">
 <article className="container content is-max-desktop">
   <h2>
-    <Link to={`/events/${id}`}>
+    <Link to={`/events/${slugify(name)}`}>
       { name }
     </Link>
   </h2>
@@ -46,7 +43,6 @@ const Events = ({ data }: PageProps<Queries.EventsQuery>) => {
     const { title, properties } = event || {};
     return {
       name: title || "",
-      id: properties?.ID || "",
       category: properties?.Category || "",
       date: properties?.Date?.start || "July 01, 1921",
       location: properties?.Location || ""}
@@ -68,7 +64,6 @@ export const query = graphql`
       childrenNotionPage{
         title
         properties {
-          ID
           Category
           Date {
             start(formatString: "MMMM DD, YYYY")

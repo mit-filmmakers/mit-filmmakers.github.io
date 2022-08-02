@@ -1,6 +1,7 @@
 import { GatsbyNode } from "gatsby";
 import { createRemoteFileNode } from "gatsby-source-filesystem";
 import { resolve } from "path";
+import slugify from "slugify";
 
 export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] = ({ actions }) => {
   actions.createTypes(`
@@ -18,16 +19,14 @@ export const createPages: GatsbyNode['createPages'] = async ({actions, graphql})
     notionDatabase(title: {eq: "Events"}){
       childrenNotionPage{
         id
-        properties {
-          ID
-        }
+        title
       }
     }
   }
-  `) as {data: {notionDatabase: {childrenNotionPage: {id: string, properties: {ID: string}}[]}}}
-  data.notionDatabase.childrenNotionPage.forEach( ({id, properties}) => {
+  `) as {data: {notionDatabase: {childrenNotionPage: {id: string, title: string}[]}}}
+  data.notionDatabase.childrenNotionPage.forEach( ({id, title}) => {
     actions.createPage({
-      path: `events/${properties.ID}`,
+      path: `events/${slugify(title)}`,
       component: resolve("./src/templates/event.tsx"),
       context: {id: id}
     })
@@ -46,7 +45,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
     node.coverImage
   ) {
     const fileNode = await createRemoteFileNode({
-      url: node.coverImage, // string that points to the URL of the image
+      url: node.coverImage as string, // string that points to the URL of the image
       parentNodeId: node.id, // id of the parent node of the fileNode you are going to create
       createNode, // helper function in gatsby-node to generate the node
       createNodeId, // helper function in gatsby-node to generate the node id
