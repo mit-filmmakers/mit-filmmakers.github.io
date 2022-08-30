@@ -25,7 +25,7 @@ class Header extends Component<NavProps, NavState> {
       <div className="content is-medium container">
         <div className="navbar-brand">
           <a className="navbar-item" style={{fontSize: "1.5rem", padding: "0 1.5rem"}} href="/">
-            <b>{title}</b>
+            {title}
           </a>
 
           <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={() => { this.setState({ expand: !this.state.expand }) }}>

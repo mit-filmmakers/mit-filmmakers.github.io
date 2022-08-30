@@ -4,47 +4,56 @@ import { graphql, PageProps, Link } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import Layout from "../components/Layout";
 import slugify from "slugify";
+import { formatDuration, IEvent, validateEvent } from "../utils/metadata";
+import { GatsbyImage } from "gatsby-plugin-image";
 
-export default function Event({data}: PageProps<Queries.EventQuery>) {
-  const {title, properties, childMdx} = data.notionPage || {};
-  const {name, category, start, end, location} = {
-    name: title || "",
-    category: properties?.Category || "",
-    start: new Date(properties?.Date?.start || "July 01, 1921"),
-    end: new Date(properties?.Date?.end || "July 01, 1921"),
-    location: properties?.Location || ""
-  };
-  const formatOptions = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
+export default function ({ data }: PageProps<Queries.EventQuery>) {
+  const { name, category, duration, location, image, icon } = validateEvent(data.notionPage)!;
   return <Layout slug={`events/${slugify(name)}}`}>
     <section className="section">
-      <article className="container content is-max-desktop">
+      <article className="container content is-max-desktop has-text-centered">
         <h2>
-          { name }
+          { icon + ' ' + name }
         </h2>
-        <div>
-          <span className="tag is-medium is-info">{ category }</span>
-        </div>
         <p>
-          {
-            start.toDateString() === end.toDateString() ?
-            start.toLocaleString('en-US', {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}) + ' - ' + end.toLocaleTimeString('en-US', {hour: 'numeric', minute: 'numeric'}) :
-            start.toLocaleString('en-US', {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}) + ' - ' + end.toLocaleString('en-US', {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'})
-          } @ { location }
+          { formatDuration(...duration) }
         </p>
+        <p>
+          { location }
+        </p>
+        <GatsbyImage image={image} alt={name}/>
+        {/* <div>
+          <span className="tag is-medium is-info">{ category }</span>
+        </div> */}
       </article>
+    </section>
+    <section className="section">
       <article className="container is-max-desktop content">
         <MDXRenderer>
-          {childMdx?.body || ""}
+          {data?.notionPage?.childMdx?.body || ""}
         </MDXRenderer>
+      </article>
+    </section>
+    <section className="section">
+      <article className="container is-max-desktop content has-text-centered">
+        <Link to='/events'>
+          <span className={`button is-info`} style={{minWidth: '5.5rem'}}>Back to Events page</span>
+        </Link>
       </article>
     </section>
   </Layout>
 }
 
 export const query = graphql`
-  query Event ($id: String) {
+  query Event($id: String) {
     notionPage(id: {eq: $id}) {
       title
+      image {
+        childImageSharp {
+          gatsbyImageData(width: 1200, height: 800, placeholder: BLURRED, formats: [AUTO, WEBP])
+        }
+      }
+      iconEmoji
       properties {
         Category
         Date {
