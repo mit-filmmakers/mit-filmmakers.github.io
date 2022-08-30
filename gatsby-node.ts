@@ -21,6 +21,15 @@ export const createPages: GatsbyNode['createPages'] = async ({actions, graphql})
         childrenNotionPage{
           id
           title
+          coverImage
+          iconEmoji
+          properties {
+            Category
+            Date {
+              start
+            }
+            Location
+          }
         }
       }
     }
@@ -28,8 +37,9 @@ export const createPages: GatsbyNode['createPages'] = async ({actions, graphql})
   const pages = data?.notionDatabase?.childrenNotionPage;
   if (pages) {
     pages.forEach(page => {
-      if (page && page.title) {
-        actions.createPage({
+      if (page && page.title && page.coverImage && page.iconEmoji && page.properties) {
+        const { Category, Date, Location } = page.properties;
+        Category && Date && Location && actions.createPage({
           path: `events/${slugify(page.title)}`,
           component: resolve("./src/templates/event.tsx"),
           context: { id: page.id }
