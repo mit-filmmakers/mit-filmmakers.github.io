@@ -10,7 +10,7 @@ const Introduction = () => <section className="section">
       Portfolio
     </h1>
     <p>
-      Placeholder text
+      Here are films created by our fellow students. Shout out to everybody! We hope you enjoy watching them 😉
     </p>
   </article>
 </section>

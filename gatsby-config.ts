@@ -43,6 +43,7 @@ const config: GatsbyConfig = {
         ],
         pages: [
           '55a47082d41f4dc38ee35d36b99b7208', // philosophy
+          'd40fb23e308147eba9218081d63e196f', // join
         ],
       },
     },

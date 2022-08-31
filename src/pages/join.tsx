@@ -7,7 +7,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 const Introduction = ({ content }: { content: string }) => <section className="section">
   <article className="container content is-max-desktop">
     <h1>
-      Philosophy
+      Join us
     </h1>
     <MDXRenderer>
       {content}
@@ -15,22 +15,19 @@ const Introduction = ({ content }: { content: string }) => <section className="s
   </article>
 </section>
 
-// markup
-const Philosophy = ({ data }: PageProps<Queries.PhilosophyQuery>) => {
+export default function ({ data }: PageProps<Queries.JoinQuery>) {
   let content = data?.mdx?.body || "";
   return (
-    <Layout slug="philosophy">
+    <Layout slug="join">
       <Introduction content={content}/>
     </Layout>
   )
 }
 
 export const query = graphql`
-query Philosophy {
-  mdx(frontmatter: {title: {eq: "Philosophy"}}) {
-    body
+  query Join {
+    mdx(frontmatter: {title: {eq: "Join us"}}) {
+      body
+    }
   }
-}
 `
-
-export default Philosophy

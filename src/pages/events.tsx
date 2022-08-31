@@ -12,7 +12,7 @@ const Introduction = () => <section className="section">
     Events
   </h1>
   <p>
-    Placeholder
+    We organize various workshops on film making skills and host film making competitions! We always provide free food thanks to the funding from MIT Graduate Student Council.
   </p>
 </article>
 </section>

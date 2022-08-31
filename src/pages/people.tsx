@@ -34,9 +34,9 @@ const Introduction = () => <section className="section">
   <h1>
     People
   </h1>
-  <p>
+  {/* <p>
     Placeholder text
-  </p>
+  </p> */}
 </article>
 </section>
 

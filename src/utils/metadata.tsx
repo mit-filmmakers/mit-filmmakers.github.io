@@ -44,9 +44,9 @@ export const formatDuration = (d1: Date, d2: Date) => `${formatDatetime(d1)} - $
 const summary: Category[] = [
   {slug: "", name: "Home", description: ""},
   {slug: "people", name: "People", description: ""},
-  {slug: "philosophy", name: "Philosophy", description: ""},
   {slug: "portfolio", name: "Portfolio", description: ""},
-  {slug: "events", name: "Events", description: ""}
+  {slug: "events", name: "Events", description: ""},
+  {slug: "join", name: "Join us", description: ""}
 ]
 
 export default summary;
