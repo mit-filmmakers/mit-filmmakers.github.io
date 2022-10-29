@@ -15,15 +15,17 @@ interface FilmProps {
   cinematography: string,
   starring: string,
 }
-// "🎬 " + prop("Directed by") + " ✍️ " + prop("Written by") + " 🌟 " + prop("Starring")
-const Film = ({url, name, premiered, directed_by, written_by, starring}: FilmProps) => <article className="container content" key={url}>
+
+const Film = ({url, name, premiered, directed_by, written_by, starring}: FilmProps) => <article className="container content" key={url} style={{padding: "2rem 0"}}>
   <div className="columns">
     <div className="column is-one-third" style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
       <h2>{name}</h2>
       <p>Premiered on { formatDate(premiered) }</p>
-      <p>🎬 Directed by &nbsp;<strong>{directed_by}</strong></p>
-      <p>✍️ Written by &nbsp;<strong>{written_by}</strong></p>
-      <p>🌟 Starring &nbsp;<strong>{starring}</strong></p>
+      <p>
+        🎬 Directed by &nbsp;<strong>{directed_by}</strong><br />
+        ✍️ Written by &nbsp;<strong>{written_by}</strong><br />
+        🌟 Starring &nbsp;<strong>{starring}</strong>
+      </p>
     </div>
     <div className="column">
       <div style={{position: "relative", padding: "30% 45%"}}>

@@ -16,14 +16,14 @@ interface PersonProps {
   photo: ReactElement
 }
 
-const Person = ( {name, email, affiliation, major, photo, position }: PersonProps ) => <div key={name} className="card" style={{margin: "1.5rem", padding: 0, overflow: "hidden", position: "relative", zIndex: 0}}>
+const Person = ( {name, email, affiliation, major, photo, position }: PersonProps ) => <div key={name} className="card" style={{margin: "1.5rem",overflow: "hidden", position: "relative", zIndex: 0}}>
 <div className="card-image" style={{width: "250px", height: "250px", padding: 0}}>
   {photo}
 </div>
-<div className="card-content" style={{width: "250px", height: position ? "205px" : "165px", padding: "1.5rem"}}>
+<div className="card-content" style={{width: "250px", height: position ? "205px" : "165px", fontSize: "16px"}}>
   <div className="media">
     <div className="media-content">
-      <p className="title is-5" style={{marginBottom: "1rem"}}>{name}</p>
+      <p className="title is-5">{name}</p>
       {
         position ? <p><span className="tag is-info is-light">{position}</span></p> : <div></div>
       }
@@ -39,7 +39,7 @@ const Group = ({ category, nodes }: { category: string, nodes: PersonProps[] }) 
     <h2>
       { category }
     </h2>
-    <div style={{display: "flex", flexWrap: "wrap", justifyContent: "center", padding: 0}}>
+    <div style={{display: "flex", flexWrap: "wrap", justifyContent: "space-around"}}>
       {nodes.map(x => <Person {...x}/>)}
     </div>
   </article>
@@ -65,10 +65,10 @@ const People = ({ data }: PageProps<Queries.PeopleQuery>) => {
   const alumni = nodes.filter(({ category }) => category == 'Alumni');
   return (
     <Layout slug="people">
-      <Hero title='People' subtitle='' />
-      <Group category={'Officers'} nodes={officers}/>
-      <Group category={'Members'} nodes={members}/>
-      <Group category={'Alumni'} nodes={alumni}/>
+      <Hero title="People" subtitle='' />
+      <Group category="Officers" nodes={officers}/>
+      <Group category="Members" nodes={members}/>
+      <Group category="Alumni" nodes={alumni}/>
     </Layout>
   )
 }

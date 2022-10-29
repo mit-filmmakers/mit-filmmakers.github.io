@@ -10,7 +10,7 @@ import Hero from "../components/Hero";
 const Event = ({ name, category, duration, location, image, icon }: IEvent) => <section className="section" key={name}>
   <article className="container content">
     <Link to={`/events/${slugify(name)}`}>
-      <div className="box columns" style={{padding: 0, overflow: "hidden", position: 'relative', zIndex: 0, margin: 0}}>
+      <div className="box columns" style={{margin: 0, padding: 0, overflow: "hidden", position: 'relative', zIndex: 0, fontSize: "16px"}}>
         <div className="column" style={{padding: 0}}>
           <GatsbyImage image={image} alt={name}/>
         </div>
