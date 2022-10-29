@@ -11,7 +11,7 @@ export default function ({ data }: PageProps<Queries.EventQuery>) {
   const { name, category, duration, location, image, icon } = validateEvent(data.notionPage)!;
   return <Layout slug={`events/${slugify(name)}}`}>
     <section className="section">
-      <article className="container content is-max-desktop has-text-centered">
+      <article className="container content has-text-centered">
         <h2>
           { icon + ' ' + name }
         </h2>
@@ -28,14 +28,14 @@ export default function ({ data }: PageProps<Queries.EventQuery>) {
       </article>
     </section>
     <section className="section">
-      <article className="container is-max-desktop content">
+      <article className="container content">
         <MDXRenderer>
           {data?.notionPage?.childMdx?.body || ""}
         </MDXRenderer>
       </article>
     </section>
     <section className="section">
-      <article className="container is-max-desktop content has-text-centered">
+      <article className="container content has-text-centered">
         <Link to='/events'>
           <span className={`button is-info`} style={{minWidth: '5.5rem'}}>Back to Events page</span>
         </Link>

@@ -1,7 +1,6 @@
 import * as React from "react";
 import "../styles/index.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
+import { FaCheck } from "react-icons/fa";
 
 const endpoint = "https://publicactiontrigger.azurewebsites.net/api/dispatches/mit-filmmakers/mit-filmmakers.github.io";
 
@@ -36,7 +35,7 @@ class Admin extends React.Component<object, AdminState> {
         return <div style={{display: 'flex', justifyContent: 'center', padding: "2rem"}}>
             { this.state.status == Status.finished ?
             <span className={`button is-info`} style={{minWidth: '5.5rem'}}>
-                <FontAwesomeIcon icon={faCheck} className="icon is-small"/>
+                <FaCheck />
             </span> :
             this.state.status == Status.submitting ?
             <span className={`button is-info is-loading`} style={{minWidth: '5.5rem'}}>Rebuild</span> :

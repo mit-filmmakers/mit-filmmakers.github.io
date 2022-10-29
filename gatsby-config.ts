@@ -18,7 +18,7 @@ const config: GatsbyConfig = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        "icon": "src/images/icon.png"
+        "icon": "src/images/logo.png"
       }
     },
     "gatsby-plugin-sharp",
@@ -44,6 +44,7 @@ const config: GatsbyConfig = {
         pages: [
           '55a47082d41f4dc38ee35d36b99b7208', // philosophy
           'd40fb23e308147eba9218081d63e196f', // join
+          '204b87a798bc438cbb6547a7ae24ede5', // hackathon
         ],
       },
     },

@@ -7,7 +7,7 @@ const NotFound = () => {
   return (
     <Layout slug="404">
       <main>
-        <section className="section container content is-max-desktop">
+        <section className="section container content">
           <h1>Page not found</h1>
           <p>
             Sorry{" "}

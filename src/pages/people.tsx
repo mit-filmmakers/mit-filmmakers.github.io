@@ -2,6 +2,7 @@ import * as React from "react";
 import "../styles/index.scss";
 import { ReactElement } from "react";
 import Layout from "../components/Layout";
+import Hero from "../components/Hero";
 import { GatsbyImage, StaticImage } from "gatsby-plugin-image";
 import { graphql, PageProps } from "gatsby";
 
@@ -11,17 +12,21 @@ interface PersonProps {
   affiliation: string,
   major: string,
   category: string,
+  position?: string,
   photo: ReactElement
 }
 
-const Person = ( {name, email, affiliation, major, photo}: PersonProps ) => <div key={name} className="card" style={{margin: "1rem", padding: 0, overflow: "hidden", position: "relative", zIndex: 0}}>
+const Person = ( {name, email, affiliation, major, photo, position }: PersonProps ) => <div key={name} className="card" style={{margin: "1.5rem", padding: 0, overflow: "hidden", position: "relative", zIndex: 0}}>
 <div className="card-image" style={{width: "250px", height: "250px", padding: 0}}>
   {photo}
 </div>
-<div className="card-content" style={{width: "250px", height: "150px", padding: "1.5rem"}}>
+<div className="card-content" style={{width: "250px", height: position ? "230px" : "170px", padding: "1.5rem"}}>
   <div className="media">
     <div className="media-content">
-      <p className="title is-4">{name}</p>
+      <p className="title is-5" style={{marginBottom: "1rem"}}>{name}</p>
+      {
+        position ? <p><span className="tag is-info is-light">{position}</span></p> : <div></div>
+      }
       <p className="subtitle is-6"><a href={"mailto:" + email}>{email}</a></p>
       <p>{affiliation}, {major}</p>
     </div>
@@ -29,19 +34,8 @@ const Person = ( {name, email, affiliation, major, photo}: PersonProps ) => <div
 </div>
 </div>
 
-const Introduction = () => <section className="section">
-<article className="container content is-max-desktop">
-  <h1>
-    People
-  </h1>
-  {/* <p>
-    Placeholder text
-  </p> */}
-</article>
-</section>
-
 const Group = ({ category, nodes }: { category: string, nodes: PersonProps[] }) => <section className="section">
-  <article className="container content is-max-desktop">
+  <article className="container content">
     <h2>
       { category }
     </h2>
@@ -62,6 +56,7 @@ const People = ({ data }: PageProps<Queries.PeopleQuery>) => {
       affiliation: properties?.Affiliation || "",
       major: properties?.Major || "",
       category: properties?.Category || "",
+      position: properties?.Position || undefined,
       photo: photo }
   }) || [];
   nodes.sort((a, b) => a.name.localeCompare(b.name));
@@ -70,7 +65,7 @@ const People = ({ data }: PageProps<Queries.PeopleQuery>) => {
   const alumni = nodes.filter(({ category }) => category == 'Alumni');
   return (
     <Layout slug="people">
-      <Introduction />
+      <Hero title='People' subtitle='' />
       <Group category={'Officers'} nodes={officers}/>
       <Group category={'Members'} nodes={members}/>
       <Group category={'Alumni'} nodes={alumni}/>
@@ -93,6 +88,7 @@ query People {
         Category
         EDU_Email
         Major
+        Position
       }
     }
   }

@@ -9,7 +9,7 @@ interface NavItemProps {
 }
 
 const NavItem = ({name, slug, current}: NavItemProps) => <Link to={`/${slug}/`.replace('//', '/')} key={slug} className={"navbar-item" + (slug === current ? " navbar-item-current" : "")}>
-  <span>&nbsp;&nbsp;{name}</span>
+  <span>{name}</span>
 </Link>
 
 interface NavProps { slug: string }
@@ -21,26 +21,26 @@ class Header extends Component<NavProps, NavState> {
   }
 
   render() {
-    return <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation">
-      <div className="content is-medium container">
-        <div className="navbar-brand">
-          <a className="navbar-item" style={{fontSize: "1.5rem", padding: "0 1.5rem"}} href="/">
-            {title}
-          </a>
+    return <nav className="navbar is-fixed-top" role="navigation" aria-label="main navigation" style={{paddingLeft: "240px", paddingRight: "240px"}}>
+      {/* <div style={{maxWidth: "1440px", margin: "auto"}}> */}
+            <div className="navbar-brand">
+              <a className="navbar-item" style={{fontSize: "1.5rem", padding: "0 1.5rem"}} href="/">
+                {title}
+              </a>
 
-          <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={() => { this.setState({ expand: !this.state.expand }) }}>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
-        <div className={this.state.expand ? "navbar-menu is-active" : "navbar-menu"}>
-          <div className="navbar-start" style={{justifyContent: "center", marginLeft: "auto"}}>
-            {summary.map(x => <NavItem {...x} current={this.props.slug} key={x.slug} />)}
+              <a role="button" className="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={() => { this.setState({ expand: !this.state.expand }) }}>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+              </a>
+            </div>
+            <div className={this.state.expand ? "navbar-menu is-active" : "navbar-menu"}>
+              <div className="navbar-end" style={{justifyContent: "center", marginLeft: "auto"}}>
+                {summary.map(x => <NavItem {...x} current={this.props.slug} key={x.slug} />)}
+              </div>
           </div>
-        </div>
-      </div>
-  </nav>
+      {/* </div> */}
+    </nav>
   }
 }
 

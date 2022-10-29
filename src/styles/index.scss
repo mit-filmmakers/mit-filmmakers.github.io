@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+$navbar-background-color: #333;
 $navbar-height: 4rem;
 $content-heading-weight: 400;
 $dropdown-menu-min-width: 1rem;
@@ -8,16 +9,19 @@ $footer-padding: 3rem 1.5rem 4rem;
 
 @import "~bulma/bulma.sass";
 
-@import url('https://fonts.googleapis.com/css?family=Gentium+Plus&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 
 body {
-  font-family: 'Gentium Plus';
+  font-family: 'Nunito';
+  color: #333;
+  font-size: 18px;
 }
 
 .navbar-item {
   padding: 0.5rem 1rem;
+  color: #ddd
 }
 
 .navbar-item-current {
-  background-color: #fafafa;
+  background-color: #666;
 }

@@ -46,7 +46,8 @@ const summary: Category[] = [
   {slug: "people", name: "People", description: ""},
   {slug: "portfolio", name: "Portfolio", description: ""},
   {slug: "events", name: "Events", description: ""},
-  {slug: "join", name: "Join us", description: ""}
+  {slug: "hackathon", name: "Hackathon", description: ""},
+  {slug: "join", name: "Join us", description: ""},
 ]
 
 export default summary;

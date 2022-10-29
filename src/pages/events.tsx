@@ -5,20 +5,10 @@ import { graphql, PageProps, Link } from "gatsby";
 import slugify from "slugify";
 import { formatDuration, IEvent, validateEvent } from "../utils/metadata";
 import { GatsbyImage } from "gatsby-plugin-image";
-
-const Introduction = () => <section className="section">
-<article className="container content is-max-desktop">
-  <h1>
-    Events
-  </h1>
-  <p>
-    We organize various workshops on film making skills and host film making competitions! We always provide free food thanks to the funding from MIT Graduate Student Council.
-  </p>
-</article>
-</section>
+import Hero from "../components/Hero";
 
 const Event = ({ name, category, duration, location, image, icon }: IEvent) => <section className="section" key={name}>
-  <article className="container content is-max-desktop">
+  <article className="container content">
     <Link to={`/events/${slugify(name)}`}>
       <div className="box columns" style={{padding: 0, overflow: "hidden", position: 'relative', zIndex: 0, margin: 0}}>
         <div className="column" style={{padding: 0}}>
@@ -39,7 +29,7 @@ const Event = ({ name, category, duration, location, image, icon }: IEvent) => <
 
 const Events = ({ nodes }: { nodes: IEvent[] }) => <Layout slug="events">
   <main>
-    <Introduction />
+    <Hero title='Events' subtitle="We organize various workshops on film making skills and host film making competitions! We always provide free food thanks to the funding from MIT Graduate Student Council."/>
     {nodes.map(Event)}
   </main>
 </Layout>
