@@ -17,7 +17,7 @@ export default function ({ data }: PageProps<Queries.JoinQuery>) {
   let content = data?.mdx?.body || "";
   return (
     <Layout slug="hackathon">
-      <Hero title="AI for Film Making Hackathon “Tell Me Your Dream”" subtitle=""/>
+      <Hero title="AI for Film Making Hackathon" subtitle="“Tell Me Your Dream”"/>
       <Content content={content}/>
     </Layout>
   )
