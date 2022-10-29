@@ -6,7 +6,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import Hero from "../components/Hero";
 
 const Content = ({ content }: { content: string }) => <section className="section">
-  <article className="container content is-max-widescreen">
+  <article className="container content is-max-widescreen mdx-content">
     <MDXRenderer>
       {content}
     </MDXRenderer>
@@ -17,7 +17,7 @@ export default function ({ data }: PageProps<Queries.JoinQuery>) {
   let content = data?.mdx?.body || "";
   return (
     <Layout slug="hackathon">
-      <Hero title="Hackathon" subtitle=""/>
+      <Hero title="AI for Film Making Hackathon “Tell Me Your Dream”" subtitle=""/>
       <Content content={content}/>
     </Layout>
   )
