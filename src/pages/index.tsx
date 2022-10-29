@@ -4,14 +4,20 @@ import Layout from "../components/Layout";
 import { graphql, PageProps } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import Hero from "../components/Hero";
+import { StaticImage } from "gatsby-plugin-image";
 
 const intro = '';
 
 const Philosophy = ({ content }: { content: string }) => <section className="section">
-  <article className="container content">
-    <MDXRenderer>
-      {content}
-    </MDXRenderer>
+  <article className="container content columns" style={{margin: "auto"}}>
+    <div className="column has-text-centered">
+      <StaticImage src={"../images/logo.png"} alt="fallback" style={{maxWidth: "400px"}} />
+    </div>
+    <div className="column">
+      <MDXRenderer>
+        {content}
+      </MDXRenderer>
+    </div>
   </article>
 </section>
 

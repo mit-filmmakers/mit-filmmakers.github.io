@@ -48,7 +48,7 @@ const Social = () => <section className="column has-text-centered" style={{displ
   </p>
 </section>
 
-const Footer = () => <footer className="footer" style={{padding: "2rem"}}>
+const Footer = () => <footer className="footer">
   <div className="container">
     <div className="columns" style={{alignItems: "center"}}>
       <Copyright />

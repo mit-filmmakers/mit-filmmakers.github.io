@@ -5,7 +5,9 @@ $navbar-height: 4rem;
 $content-heading-weight: 400;
 $dropdown-menu-min-width: 1rem;
 $timeline-marker-color: white;
-$footer-padding: 3rem 1.5rem 4rem;
+$footer-padding: 2rem;
+$navbar-burger-color: #ddd;
+$hero-body-padding: 1rem 2rem 2rem;
 
 @import "~bulma/bulma.sass";
 
@@ -15,6 +17,25 @@ body {
   font-family: 'Nunito';
   color: #333;
   font-size: 18px;
+}
+
+.card-content {
+  font-size: 16px
+}
+
+@media (min-width: 1440px) {
+  .limited-navbar {
+    padding-left: calc(50% - 720px);
+    padding-right: calc(50% - 720px);
+  }
+}
+
+.navbar-brand a.navbar-item:hover {
+  color: #fff;
+}
+
+a.navbar-burger:hover {
+  color: white;
 }
 
 .navbar-item {

@@ -20,7 +20,7 @@ const Person = ( {name, email, affiliation, major, photo, position }: PersonProp
 <div className="card-image" style={{width: "250px", height: "250px", padding: 0}}>
   {photo}
 </div>
-<div className="card-content" style={{width: "250px", height: position ? "230px" : "170px", padding: "1.5rem"}}>
+<div className="card-content" style={{width: "250px", height: position ? "205px" : "165px", padding: "1.5rem"}}>
   <div className="media">
     <div className="media-content">
       <p className="title is-5" style={{marginBottom: "1rem"}}>{name}</p>
