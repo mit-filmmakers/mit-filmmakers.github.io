@@ -20,7 +20,7 @@ const Person = ( {name, email, affiliation, major, photo, position }: PersonProp
 <div className="card-image" style={{width: "250px", height: "250px", padding: 0}}>
   {photo}
 </div>
-<div className="card-content" style={{width: "250px", height: position ? "205px" : "165px", fontSize: "16px"}}>
+<div className="card-content" style={{width: "250px", height: position ? "205px" : "165px"}}>
   <div className="media">
     <div className="media-content">
       <p className="title is-5">{name}</p>
@@ -60,12 +60,33 @@ const People = ({ data }: PageProps<Queries.PeopleQuery>) => {
       photo: photo }
   }) || [];
   nodes.sort((a, b) => a.name.localeCompare(b.name));
-  const officers = nodes.filter(({ category }) => category == 'Officer');
+  const known_positions = [
+    [/^President/, 0],
+    [/^Vice President/, 1],
+    [/^Treasurer/, 2],
+    [/Chair$/, 3]
+  ] as const;
+  const get_rank = (s: string | undefined) => {
+    if (s === undefined) return 10;
+    for (const pair of known_positions) {
+      const [regex, rank] = pair;
+      if (regex.test(s)) {
+        if (/retired/.test(s)) return rank + .5;
+        return rank;
+      }
+    }
+    return 10;
+  }
+  const founders = nodes.filter(({ category }) => category === 'Founder');
+  founders.sort((a, b) => get_rank(a.position) - get_rank(b.position));
+  const officers = nodes.filter(({ category }) => category === 'Officer');
+  officers.sort((a, b) => get_rank(a.position) - get_rank(b.position));
   const members = nodes.filter(({ category }) => category == 'Member');
   const alumni = nodes.filter(({ category }) => category == 'Alumni');
   return (
     <Layout slug="people">
       <Hero title="People" subtitle='' />
+      <Group category="Founders" nodes={founders}/>
       <Group category="Officers" nodes={officers}/>
       <Group category="Members" nodes={members}/>
       <Group category="Alumni" nodes={alumni}/>

@@ -34,12 +34,12 @@ class Admin extends React.Component<object, AdminState> {
     render() {
         return <div style={{display: 'flex', justifyContent: 'center', padding: "2rem"}}>
             { this.state.status == Status.finished ?
-            <span className={`button is-info`} style={{minWidth: '5.5rem'}}>
+            <span className={`button is-dark`} style={{minWidth: '5.5rem'}}>
                 <FaCheck />
             </span> :
             this.state.status == Status.submitting ?
-            <span className={`button is-info is-loading`} style={{minWidth: '5.5rem'}}>Rebuild</span> :
-            <span className={`button is-info`} style={{minWidth: '5.5rem'}} onClick={() => this.rebuild()}>Rebuild</span>
+            <span className={`button is-dark is-loading`} style={{minWidth: '5.5rem'}}>Rebuild</span> :
+            <span className={`button is-dark`} style={{minWidth: '5.5rem'}} onClick={() => this.rebuild()}>Rebuild</span>
             }
         </div>
     }

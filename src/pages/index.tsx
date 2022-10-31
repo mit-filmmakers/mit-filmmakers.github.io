@@ -1,7 +1,7 @@
 import React from "react";
 import "../styles/index.scss";
 import Layout from "../components/Layout";
-import { graphql, PageProps } from "gatsby";
+import { graphql, PageProps, Link } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import Hero from "../components/Hero";
 import { StaticImage } from "gatsby-plugin-image";
@@ -31,7 +31,14 @@ const Index = ({ data }: PageProps<Queries.IndexQuery>) => {
   const content = data?.mdx?.body || "";
   return (
     <Layout slug="">
-      <Hero title='Home' subtitle={intro} />
+      <Hero title='Welcome to MIT Film Makers Association!' subtitle={intro} />
+      <section className="hero" style={{backgroundColor: "#ccc"}}>
+        <div className="hero-body" style={{maxWidth: "1440px", margin: "auto", padding: "1rem"}}>
+          <p className="subtitle" style={{color: "#000", textAlign: "center"}}>
+            Learn about our <Link to="/hackathon">AI for Film Making Hackathon “Tell Me Your Dream”</Link>
+          </p>
+        </div>
+      </section>
       <Philosophy content={content}/>
       <Instagram />
     </Layout>

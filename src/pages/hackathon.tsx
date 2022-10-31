@@ -6,7 +6,14 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import Hero from "../components/Hero";
 
 const Content = ({ content }: { content: string }) => <section className="section">
-  <article className="container content is-max-widescreen mdx-content">
+  <article className="block has-text-centered">
+    <a href="https://forms.gle/bPbULWYJ1hn9gL4r6">
+      <span className="button is-medium is-dark">
+        Register now!
+      </span>
+    </a>
+  </article>
+  <article className="container content is-max-desktop mdx-content">
     <MDXRenderer>
       {content}
     </MDXRenderer>
