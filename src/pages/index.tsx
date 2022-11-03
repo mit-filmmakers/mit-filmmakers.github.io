@@ -11,7 +11,7 @@ const intro = '';
 const Philosophy = ({ content }: { content: string }) => <section className="section">
   <article className="container content columns" style={{margin: "auto"}}>
     <div className="column has-text-centered">
-      <StaticImage src={"../images/logo.png"} alt="fallback" style={{maxWidth: "400px"}} />
+      <StaticImage src={"../images/logo.jpg"} alt="fallback" style={{maxWidth: "400px"}} />
     </div>
     <div className="column">
       <MDXRenderer>

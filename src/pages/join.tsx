@@ -6,7 +6,7 @@ import { MDXRenderer } from "gatsby-plugin-mdx";
 import Hero from "../components/Hero";
 
 const Introduction = ({ content }: { content: string }) => <section className="section">
-  <article className="container content">
+  <article className="container content is-max-desktop">
     <MDXRenderer>
       {content}
     </MDXRenderer>
